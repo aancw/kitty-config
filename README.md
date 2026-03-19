@@ -40,7 +40,8 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - `cmd+shift+left/right` previous/next tab
 - `cmd+e` tab switcher
 - `cmd+shift+e` window/split switcher (focus overlay)
-- `cmd+shift+f` search scrollback (opens pager)
+- `cmd+shift+f` search scrollback (opens pager in search mode)
+- `cmd+shift+h` open scrollback (pager)
 - `cmd+.` show last command output (formatted, overlay pager; Nerd Font icons enabled; requires shell integration)
 
 ## Mouse Shortcuts
@@ -65,6 +66,12 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - Window resizing is smooth: `window_resize_step_cells 0`
 - Large scrollback: `scrollback_lines 10000`
 - Close confirmation enabled: `confirm_os_window_close 1`
+
+## Search (scrollback)
+Use `cmd+shift+f`, then inside the pager:
+- `/text` search forward, `?text` search backward
+- `n` next match, `N` previous match
+- `q` quit pager
 
 ## File Layout
 - `kitty.conf` main config
