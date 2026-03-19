@@ -40,6 +40,8 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - `cmd+shift+left/right` previous/next tab
 - `cmd+e` tab switcher
 - `cmd+shift+e` window/split switcher (focus overlay)
+- `cmd+shift+f` search scrollback (opens pager)
+- `cmd+.` show last command output (formatted, overlay pager; Nerd Font icons enabled; requires shell integration)
 
 ## Mouse Shortcuts
 - Right click: paste
