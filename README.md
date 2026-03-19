@@ -80,6 +80,11 @@ Use `cmd+shift+f`, then inside the pager:
 ## Background Job Notifications
 When running commands with `&` (e.g., `sleep 10 &`), you'll get a notification when they complete.
 
+**Enable notifications on macOS:**
+1. Run `kitten notify "Test" "Hello"` in kitty to trigger permission request
+2. Go to **System Settings → Notifications**
+3. Find **kitty** in the app list and enable it
+
 Test notification:
 ```bash
 kitten notify "Hello" "This is a test"
