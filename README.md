@@ -78,9 +78,20 @@ Use `cmd+shift+f`, then inside the pager:
 - `q` quit pager
 
 ## Background Job Notifications
-When running commands with `&` (e.g., `sleep 10 &`), you'll get a notification when they complete.
+When running commands with `&` (e.g., `sleep 10 &`), you'll get a visual bell when they complete.
 
-**Enable notifications on macOS:**
+**Manual notification** (more reliable):
+```bash
+# Run command then notify when done
+sleep 10 && kitten notify "Done" "Command completed"
+```
+
+Or use background with notification on finish:
+```bash
+sleep 10 & PID=$!; wait $PID; kitten notify "Done" "sleep finished"
+```
+
+**Enable desktop notifications on macOS:**
 1. Run `kitten notify "Test" "Hello"` in kitty to trigger permission request
 2. Go to **System Settings → Notifications**
 3. Find **kitty** in the app list and enable it
