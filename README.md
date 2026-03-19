@@ -9,6 +9,7 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - Hidden scrollbar for a clean canvas
 - Minimal tab bar that only appears with 2+ tabs
 - Ghostty‑style mouse shortcuts and macOS keybindings
+- URL detection and clickable links
 - Smooth window resizing (pixel‑based)
 - Large scrollback history
 
@@ -50,6 +51,7 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - `ctrl` + `shift` + right click: split down
 - `alt` + right click: close split
 - `shift` + right click: reset terminal
+- `ctrl` + left click on URL: open in browser
 - Middle click: paste from primary selection
 - Middle click on tab: close tab (kitty default)
 
