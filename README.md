@@ -10,6 +10,10 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - Minimal tab bar that only appears with 2+ tabs
 - Ghostty‑style mouse shortcuts and macOS keybindings
 
+## Screenshots
+![Neofetch](image/neofetch.png)
+![Split and tab](image/split-and-tab.png)
+
 ## Requirements
 - Kitty terminal
 - Font: `JetBrainsMono Nerd Font Mono`
@@ -40,6 +44,17 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - `alt` + right click: close split
 - `shift` + right click: reset terminal
 - Middle click: paste from primary selection
+
+## Menubar Actions (macOS)
+- Actions → Paste
+- Actions → Split Right
+- Actions → Split Down
+- Actions → Reset Terminal
+- Actions → Change Tab Title
+
+## Notes
+- Splits use Kitty’s `splits` layout. This is forced automatically by the shortcuts.
+- `vsplit` = left/right, `hsplit` = top/bottom
 
 ## File Layout
 - `kitty.conf` main config
