@@ -9,6 +9,8 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - Hidden scrollbar for a clean canvas
 - Minimal tab bar that only appears with 2+ tabs
 - Ghostty‑style mouse shortcuts and macOS keybindings
+- Smooth window resizing (pixel‑based)
+- Large scrollback history
 
 ## Screenshots
 ![Neofetch](image/neofetch.png)
@@ -36,6 +38,8 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - `cmd+shift+i` change tab title
 - `cmd+t` new tab
 - `cmd+shift+left/right` previous/next tab
+- `cmd+e` tab switcher
+- `cmd+shift+e` window/split switcher (focus overlay)
 
 ## Mouse Shortcuts
 - Right click: paste
@@ -44,6 +48,7 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - `alt` + right click: close split
 - `shift` + right click: reset terminal
 - Middle click: paste from primary selection
+- Middle click on tab: close tab (kitty default)
 
 ## Menubar Actions (macOS)
 - Actions → Paste
@@ -55,6 +60,9 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 ## Notes
 - Splits use Kitty’s `splits` layout. This is forced automatically by the shortcuts.
 - `vsplit` = left/right, `hsplit` = top/bottom
+- Window resizing is smooth: `window_resize_step_cells 0`
+- Large scrollback: `scrollback_lines 10000`
+- Close confirmation enabled: `confirm_os_window_close 1`
 
 ## File Layout
 - `kitty.conf` main config
