@@ -63,7 +63,8 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - Actions → Change Tab Title
 
 ## Notes
-- Splits use Kitty’s `splits` layout. This is forced automatically by the shortcuts.
+- Splits and tabs inherit current working directory (requires shell integration in `.zshrc`)
+- Splits use Kitty's `splits` layout. This is forced automatically by the shortcuts.
 - `vsplit` = left/right, `hsplit` = top/bottom
 - Window resizing is smooth: `window_resize_step_cells 0`
 - Large scrollback: `scrollback_lines 10000`
