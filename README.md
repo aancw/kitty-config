@@ -6,7 +6,7 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - Clean look with Catppuccin Frappe theme
 - Subtle split borders only when you split
 - Unfocused panes dimmed for focus
-- Hidden scrollbar for a clean canvas
+- Interactive scrollbar with autohide
 - Minimal tab bar that only appears with 2+ tabs
 - Ghostty‑style mouse shortcuts and macOS keybindings
 - URL detection and clickable links
