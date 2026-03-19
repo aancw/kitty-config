@@ -7,6 +7,7 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - Subtle split borders only when you split
 - Unfocused panes dimmed for focus
 - Interactive scrollbar with autohide
+- Background job notifications (visual + desktop)
 - Minimal tab bar that only appears with 2+ tabs
 - Ghostty‑style mouse shortcuts and macOS keybindings
 - URL detection and clickable links
@@ -75,6 +76,14 @@ Use `cmd+shift+f`, then inside the pager:
 - `/text` search forward, `?text` search backward
 - `n` next match, `N` previous match
 - `q` quit pager
+
+## Background Job Notifications
+When running commands with `&` (e.g., `sleep 10 &`), you'll get a notification when they complete.
+
+Test notification:
+```bash
+kitten notify "Hello" "This is a test"
+```
 
 ## File Layout
 - `kitty.conf` main config
