@@ -10,10 +10,11 @@ from kitty.tab_bar import (
 )
 
 opts = get_options()
-
-surface1 = as_rgb(int("45475A", 16))
 window_icon = ""
 layout_icon = ""
+SHOW_RIGHT_STATUS = False
+RIGHT_STATUS_STYLE = "plain"  # "plain" or "pill"
+RIGHT_STATUS_ICONS = False
 
 active_tab_layout_name = ""
 active_tab_num_windows = 1
@@ -37,25 +38,60 @@ def draw_tab(
     end = draw_tab_with_separator(
         draw_data, screen, tab, before, max_title_length, index, is_last, extra_data
     )
-    _draw_right_status(
-        screen,
-        is_last,
-    )
+    if SHOW_RIGHT_STATUS:
+        _draw_right_status(
+            screen,
+            is_last,
+        )
     return end
 
 
 def _draw_right_status(screen: Screen, is_last: bool) -> int:
+    if not SHOW_RIGHT_STATUS:
+        return screen.cursor.x
     if not is_last:
         return screen.cursor.x
 
-    cells = [
-        # layout name
-        (surface1, screen.cursor.bg, " " + layout_icon + " "),
-        (surface1, screen.cursor.bg, active_tab_layout_name + " "),
-        # num windows
-        (surface1, screen.cursor.bg, " " + window_icon + " "),
-        (surface1, screen.cursor.bg, str(active_tab_num_windows) + " "),
-    ]
+    status_bg = as_rgb(opts.color0)
+    status_fg = as_rgb(opts.foreground)
+    # Ensure caps match the actual bar background (avoid black gaps).
+    bar_bg = as_rgb(opts.background)
+
+    if RIGHT_STATUS_STYLE == "pill":
+        cells = [
+            # left cap
+            (status_bg, bar_bg, ""),
+            # layout name
+            (status_fg, status_bg, " " + layout_icon + " "),
+            (status_fg, status_bg, active_tab_layout_name + " "),
+            # num windows
+            (status_fg, status_bg, " " + window_icon + " "),
+            (status_fg, status_bg, str(active_tab_num_windows) + " "),
+            # right cap
+            (status_bg, bar_bg, ""),
+        ]
+    else:
+        if RIGHT_STATUS_ICONS:
+            text = (
+                " "
+                + layout_icon
+                + " "
+                + active_tab_layout_name
+                + "  "
+                + window_icon
+                + " "
+                + str(active_tab_num_windows)
+                + " "
+            )
+        else:
+            text = (
+                " layout:"
+                + active_tab_layout_name
+                + "  win:"
+                + str(active_tab_num_windows)
+                + " "
+            )
+        cells = [(status_fg, bar_bg, text)]
 
     # calculate leading spaces to separate tabs from right status
     right_status_length = 0
@@ -71,6 +107,8 @@ def _draw_right_status(screen: Screen, is_last: bool) -> int:
 
     # draw leading spaces
     if leading_spaces > 0:
+        screen.cursor.bg = bar_bg
+        screen.cursor.fg = 0
         screen.draw(" " * leading_spaces)
 
     # draw right status
@@ -79,7 +117,7 @@ def _draw_right_status(screen: Screen, is_last: bool) -> int:
         screen.cursor.bg = bg
         screen.draw(cell)
     screen.cursor.fg = 0
-    screen.cursor.bg = 0
+    screen.cursor.bg = bar_bg
 
     # update cursor position
     screen.cursor.x = max(screen.cursor.x, screen.columns - right_status_length)
