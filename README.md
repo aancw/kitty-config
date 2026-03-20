@@ -55,6 +55,7 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - `cmd+shift+f` search scrollback (opens pager in search mode)
 - `cmd+shift+h` open scrollback (pager)
 - `cmd+.` show last command output (formatted, overlay pager; Nerd Font icons enabled; requires shell integration)
+- `cmd+o` open current directory in Finder
 
 ## Mouse Shortcuts
 - Right click: paste
