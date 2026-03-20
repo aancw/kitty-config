@@ -21,6 +21,10 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 ## Requirements
 - Kitty terminal
 - Font: `JetBrainsMono Nerd Font Mono`
+- [fzf](https://github.com/junegunn/fzf) (for tab switcher)
+- [jq](https://github.com/jqlang/jq) (for tab switcher)
+  - If Kitty is launched from the GUI, ensure these binaries are discoverable.
+  - The included `kitty-tab-switcher` script uses Homebrew defaults and falls back to `command -v`.
 
 ## Install
 1. Clone or copy this repo to your Kitty config directory:
@@ -40,8 +44,14 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - `cmd+shift+i` change tab title
 - `cmd+t` new tab
 - `cmd+shift+left/right` previous/next tab
-- `cmd+e` tab switcher
 - `cmd+shift+e` window/split switcher (focus overlay)
+- `ctrl+shift+e` fzf tab switcher (see [kitty-tab-switcher](https://github.com/OsiPog/kitty-tab-switcher))
+  - Shows all tabs in an fzf overlay
+  - Search by tab title, directory, or command
+  - Preview is customized to a large 90% area with a compact list
+  - Based on [kitty-tab-switcher](https://github.com/OsiPog/kitty-tab-switcher)
+  - Requires `allow_remote_control socket-only` and `listen_on unix:/tmp/kitty-socket-{kitty_pid}` in `kitty.conf`
+  - Uses `KITTY_LISTEN_ON` automatically
 - `cmd+shift+f` search scrollback (opens pager in search mode)
 - `cmd+shift+h` open scrollback (pager)
 - `cmd+.` show last command output (formatted, overlay pager; Nerd Font icons enabled; requires shell integration)
@@ -113,6 +123,10 @@ Common tweaks in `kitty.conf`:
 - Split border thickness: `window_border_width`
 - Tab bar style: `tab_bar_style`, `tab_bar_min_tabs`
 - Padding/margins: `window_padding_width`, `window_margin_width`
+
+## Credits
+- Original tab switcher by [OsiPog/kitty-tab-switcher](https://github.com/OsiPog/kitty-tab-switcher)
+- Custom updates by @petruknisme (macOS socket handling, PATH fallbacks, preview layout)
 
 ---
 

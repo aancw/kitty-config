@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025 osipog
+# Updated by @petruknisme (macOS socket handling, PATH fallbacks, preview layout)
+
+# Resolve binaries (GUI apps may not inherit your shell PATH)
+KITTY_BIN="/Applications/kitty.app/Contents/MacOS/kitty"
+FZF_BIN="/opt/homebrew/bin/fzf"
+JQ_BIN="/opt/homebrew/bin/jq"
+
+if [ ! -x "$KITTY_BIN" ]; then
+    KITTY_BIN="$(command -v kitty)"
+fi
+if [ ! -x "$FZF_BIN" ]; then
+    FZF_BIN="$(command -v fzf)"
+fi
+if [ ! -x "$JQ_BIN" ]; then
+    JQ_BIN="$(command -v jq)"
+fi
+
+# Use the per-instance socket when available (macOS-safe)
+KITTY_SOCKET="${KITTY_LISTEN_ON:-}"
+if [ -z "$KITTY_SOCKET" ]; then
+    sock_path="$(ls -t /tmp/kitty-socket-* 2>/dev/null | head -n 1)"
+    if [ -n "$sock_path" ]; then
+        KITTY_SOCKET="unix:$sock_path"
+    fi
+fi
+if [ -z "$KITTY_SOCKET" ]; then
+    echo "Error: KITTY_LISTEN_ON is not set and no /tmp/kitty-socket-* found." >&2
+    exit 1
+fi
+
+# Get all tabs, including their ids and focused status
+tab_info=$("$KITTY_BIN" @ --to "$KITTY_SOCKET" ls | "$JQ_BIN" -r '[
+    .[].tabs[]
+    | (.windows | first) as $window
+    | ($window | .foreground_processes | first | .cmdline | first | split("/") | last) as $program
+    | {
+        title: ([
+            $program,
+            .title,
+            ($window | .last_reported_cmdline),
+            ($window | .cwd)
+        ] | join(" | ")),
+        id,
+        is_focused,
+        lines: $window | .lines,
+        first_window_id: $window | .id,
+    }
+]
+    | sort_by(.title)
+    | reverse
+    | sort_by(.is_focused)
+    | reverse
+')
+if [ -z "$tab_info" ] || [ "$tab_info" = "null" ]; then
+    echo "Error: failed to read kitty tab data." >&2
+    exit 1
+fi
+
+# Generate preview files that can be used by fzf
+echo "$tab_info" | "$JQ_BIN" -c '.[]' | while read -r item; do
+    filename="/tmp/kitty-tab-switcher-preview-tab-id-$(echo "$item" | "$JQ_BIN" -r '.id')"
+    "$KITTY_BIN" @ --to "$KITTY_SOCKET" launch \
+        --source-window="id:$(echo "$item" | "$JQ_BIN" -r '.first_window_id')" \
+        --stdin-source=@screen \
+        --stdin-add-formatting \
+        --type=background \
+        tee "$filename"\
+        > /dev/null
+done
+
+preview_percent_height=90
+
+# Use fzf to fuzzy search the tab titles
+# Customized: large preview area (90%) with a compact list
+# shellcheck disable=SC2016
+selected=$(echo "$tab_info" \
+    | "$JQ_BIN" -r ' .[] | (.id | tostring) + " | " + .title' \
+    | "$FZF_BIN" \
+        --height=100% \
+        --margin=0 \
+        --padding=1 \
+        --border=none \
+        --list-border=rounded \
+        --info=hidden \
+        --layout=reverse \
+        --cycle \
+        --preview-window=down,"$preview_percent_height"%,noinfo,border-none,nofollow,nocycle \
+        --preview='id=$(echo {} | awk "{print \$1}"); file="/tmp/kitty-tab-switcher-preview-tab-id-${id}"; if [ -f "$file" ]; then cat "$file"; else echo "No preview"; fi')
+
+# If a tab was selected, focus on that tab using its ID
+if [ -n "$selected" ]; then
+    tab_id=$(echo "$selected" | awk '{print $1}')
+    "$KITTY_BIN" @ --to "$KITTY_SOCKET" focus-tab --match id:"$tab_id"
+else
+    echo "No tab selected or operation cancelled."
+fi
