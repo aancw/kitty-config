@@ -44,6 +44,8 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - `cmd+shift+i` change tab title
 - `cmd+t` new tab
 - `cmd+shift+left/right` previous/next tab
+- `page_up` / `page_down` scroll
+- `home` / `end` line navigation (requires zshrc, see below)
 - `cmd+shift+e` window/split switcher (focus overlay)
 - `ctrl+shift+e` fzf tab switcher (see [kitty-tab-switcher](https://github.com/OsiPog/kitty-tab-switcher))
   - Shows all tabs in an fzf overlay
@@ -75,6 +77,15 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - Actions → Change Tab Title
 
 ## Notes
+- Home/End key navigation requires adding to `.zshrc`:
+  ```bash
+  # Home
+  bindkey '\e[H'  beginning-of-line
+  bindkey '\eOH'  beginning-of-line
+  # End
+  bindkey '\e[F'  end-of-line
+  bindkey '\eOF'  end-of-line
+  ```
 - Splits and tabs inherit current working directory (requires shell integration in `.zshrc`)
 - Splits use Kitty's `splits` layout. This is forced automatically by the shortcuts.
 - `vsplit` = left/right, `hsplit` = top/bottom
