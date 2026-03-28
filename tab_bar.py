@@ -19,6 +19,9 @@ RIGHT_STATUS_ICONS = False
 active_tab_layout_name = ""
 active_tab_num_windows = 1
 
+# Fixed width for all tab titles (including index and icon space)
+FIXED_TAB_WIDTH = 20
+
 
 def draw_tab(
     draw_data: DrawData,
@@ -32,17 +35,52 @@ def draw_tab(
 ) -> int:
     global active_tab_layout_name
     global active_tab_num_windows
+
     if tab.is_active:
         active_tab_layout_name = tab.layout_name
         active_tab_num_windows = tab.num_windows
-    end = draw_tab_with_separator(
-        draw_data, screen, tab, before, max_title_length, index, is_last, extra_data
+
+    # Create a modified tab with padded/truncated title to ensure fixed width
+    # Account for: index (2 chars) + space (1) + icon (2) + space (1) = 6 chars for decoration
+    decoration_width = 6  # "1  " + icon + " "
+    available_for_title = FIXED_TAB_WIDTH - decoration_width
+
+    title = tab.title
+    if len(title) > available_for_title:
+        title = title[: available_for_title - 1] + "…"
+    else:
+        title = title + " " * (available_for_title - len(title))
+
+    # Create a new TabBarData with the fixed-width title
+    fixed_tab = TabBarData(
+        title=title,
+        is_active=tab.is_active,
+        needs_attention=tab.needs_attention,
+        tab_id=tab.tab_id,
+        os_window_id=tab.os_window_id,
+        num_windows=tab.num_windows,
+        num_window_groups=tab.num_window_groups,
+        layout_name=tab.layout_name,
+        has_activity_since_last_focus=tab.has_activity_since_last_focus,
+        active_fg=tab.active_fg,
+        active_bg=tab.active_bg,
+        inactive_fg=tab.inactive_fg,
+        inactive_bg=tab.inactive_bg,
+        num_of_windows_with_progress=tab.num_of_windows_with_progress,
+        total_progress=tab.total_progress,
+        last_focused_window_with_progress_id=tab.last_focused_window_with_progress_id,
+        session_name=tab.session_name,
+        active_session_name=tab.active_session_name,
     )
+
+    # Use a large max_title_length so our fixed title isn't truncated
+    end = draw_tab_with_separator(
+        draw_data, screen, fixed_tab, before, 100, index, is_last, extra_data
+    )
+
     if SHOW_RIGHT_STATUS:
-        _draw_right_status(
-            screen,
-            is_last,
-        )
+        _draw_right_status(screen, is_last)
+
     return end
 
 
