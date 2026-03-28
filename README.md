@@ -9,6 +9,7 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - Interactive scrollbar with autohide
 - Background job notifications (visual + desktop)
 - Minimal tab bar that only appears with 2+ tabs
+- **Fixed-width tabs** — uniform tab sizes with padded/truncated titles
 - Ghostty‑style mouse shortcuts and macOS keybindings
 - URL detection and clickable links
 - Smooth window resizing (pixel‑based)
