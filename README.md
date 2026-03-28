@@ -61,6 +61,7 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - `cmd+o` open current directory in Finder
 
 ## Mouse Shortcuts
+- **Left-click drag to select**: automatically copies to clipboard
 - Right click: paste
 - `ctrl` + right click: split right
 - `ctrl` + `shift` + right click: split down
@@ -69,6 +70,22 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - `ctrl` + left click on URL: open in browser
 - Middle click: paste from primary selection
 - Middle click on tab: close tab (kitty default)
+
+### Copy Notification
+**Current Setup**: 
+- Text auto-copies when selected (via `copy_on_select clipboard`)
+- Press **Cmd+C** to copy AND show "Copied!" notification
+- Notification shows **only from Kitty** (not from other apps)
+
+**How to use**:
+1. **Mouse selection**: Select text with mouse → auto-copies (no notification)
+2. **Keyboard copy**: Select text → press `Cmd+C` → copies + shows notification
+
+**Why this works**:
+- `Cmd+C` is mapped to both copy AND show notification
+- Only triggers when you press the shortcut in Kitty
+- Copying in other apps won't trigger Kitty's notification
+- No background processes or clipboard monitors needed
 
 ## Menubar Actions (macOS)
 - Actions → Paste
