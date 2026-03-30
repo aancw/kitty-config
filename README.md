@@ -41,6 +41,7 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - `cmd+shift+d` split down
 - `cmd+w` close split
 - `cmd+shift+r` reset terminal (also sends Enter)
+- `cmd+r` restart terminal when hung (SIGKILL process + clear)
 - `cmd+shift+l` clear screen
 - `cmd+shift+i` change window name (macOS titlebar)
 - `cmd+shift+t` change tab name (tab bar)
@@ -89,12 +90,10 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - No background processes or clipboard monitors needed
 
 ## Menubar Actions (macOS)
-- Actions → Paste
-- Actions → Split Right
-- Actions → Split Down
-- Actions → Reset Terminal
-- Actions → Change Window Name
-- Actions → Change Tab Name
+- **Terminal** → Reset, Restart (Force Kill)
+- **Splits** → Split Right, Split Down
+- **Names** → Window Title, Tab Title
+- **Clipboard** → Copy (with notification), Paste
 
 ## Notes
 - Home/End key navigation requires adding to `.zshrc`:
