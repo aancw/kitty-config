@@ -42,7 +42,8 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - `cmd+w` close split
 - `cmd+shift+r` reset terminal (also sends Enter)
 - `cmd+shift+l` clear screen
-- `cmd+shift+i` change tab title
+- `cmd+shift+i` change window name (macOS titlebar)
+- `cmd+shift+t` change tab name (tab bar)
 - `cmd+t` new tab
 - `cmd+shift+left/right` previous/next tab
 - `page_up` / `page_down` scroll
@@ -92,7 +93,8 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - Actions → Split Right
 - Actions → Split Down
 - Actions → Reset Terminal
-- Actions → Change Tab Title
+- Actions → Change Window Name
+- Actions → Change Tab Name
 
 ## Notes
 - Home/End key navigation requires adding to `.zshrc`:
