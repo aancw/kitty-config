@@ -91,6 +91,10 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 
 ## Menubar Actions (macOS)
 - **Terminal** → Reset, Restart (Force Kill)
+- **Updates** → Check for Kitty Updates
+  - Downloads latest Kitty DMG to ~/Downloads
+  - Opens DMG in Finder
+  - Quits Kitty (with confirmation prompt) so you can install
 - **Splits** → Split Right, Split Down
 - **Names** → Window Title, Tab Title
 - **Clipboard** → Copy (with notification), Paste
