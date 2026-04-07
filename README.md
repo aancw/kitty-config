@@ -12,6 +12,7 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - **Fixed-width tabs** — uniform tab sizes with padded/truncated titles
 - Ghostty‑style mouse shortcuts and macOS keybindings
 - URL detection and clickable links with confirmation prompt
+- Shell integration enabled (`shell_integration enabled`)
 - Smooth window resizing (pixel‑based)
 - Large scrollback history
 
@@ -116,6 +117,27 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - Window resizing is smooth: `window_resize_step_cells 0`
 - Large scrollback: `scrollback_lines 10000`
 - Close confirmation enabled: `confirm_os_window_close 1`
+
+## Shell Integration
+Kitty can integrate with common shells (`zsh`, `fish`, `bash`) to enable prompt-aware features.
+
+Enabled in this config:
+
+```conf
+shell_integration enabled
+```
+
+### What you get
+- Open last command output in a pager
+- Jump between prompts in scrollback
+- Mouse cursor positioning while editing the prompt
+- Open command output in a pager from scrollback
+- Better title/tab metadata (cwd/command)
+- Prompt-aware cursor behavior
+- Clone current shell into a new Kitty window
+- Better behavior for complex prompts on resize
+- Shell completion support for Kitty commands
+- Prompt-aware quit confirmation behavior (`confirm_os_window_close`)
 
 ## Search (scrollback)
 Use `cmd+shift+f`, then inside the pager:
