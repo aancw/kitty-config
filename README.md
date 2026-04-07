@@ -11,7 +11,7 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - Minimal tab bar that only appears with 2+ tabs
 - **Fixed-width tabs** — uniform tab sizes with padded/truncated titles
 - Ghostty‑style mouse shortcuts and macOS keybindings
-- URL detection and clickable links
+- URL detection and clickable links with confirmation prompt
 - Smooth window resizing (pixel‑based)
 - Large scrollback history
 
@@ -70,6 +70,7 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - `alt` + right click: close split
 - `shift` + right click: reset terminal
 - `ctrl` + left click on URL: open in browser
+  - Shows a centered confirmation overlay (`y`/`n`, no Enter needed) before opening
 - Middle click: paste from primary selection
 - Middle click on tab: close tab (kitty default)
 
@@ -148,6 +149,8 @@ kitten notify "Hello" "This is a test"
 
 ## File Layout
 - `kitty.conf` main config
+- `open-actions.conf` URL click actions (confirmation flow)
+- `confirm-open-url.sh` interactive URL confirmation overlay script
 - `current-theme.conf` Catppuccin Frappe theme (included)
 - `Catppuccin-Frappe.conf` theme source
 
