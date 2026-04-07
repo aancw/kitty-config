@@ -12,6 +12,7 @@ A clean, GUI‑friendly Kitty setup inspired by Ghostty: minimal chrome, subtle 
 - **Fixed-width tabs** — uniform tab sizes with padded/truncated titles
 - Ghostty‑style mouse shortcuts and macOS keybindings
 - URL detection and clickable links with confirmation prompt
+- Safe paste checks enabled (`paste_actions quote-urls-at-prompt,replace-dangerous-control-codes,confirm-if-large`)
 - Shell integration enabled (`shell_integration enabled`)
 - Smooth window resizing (pixel‑based)
 - Large scrollback history
